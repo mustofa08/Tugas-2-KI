@@ -14,21 +14,31 @@ def server_program():
     print("Connection from: " + str(address))
 
     while True:
-        encrypted_data = conn.recv(1024).decode()  # receive data stream
-        if encrypted_data.lower() == 'bye':
-            print("Mengakhiri koneksi")
+        try:
+            encrypted_data = conn.recv(1024).decode()  # receive data stream
+            if not encrypted_data:  # check if data is None or empty
+                print("Koneksi terputus.")
+                break
+            
+            if encrypted_data.lower() == 'bye':
+                print("Mengakhiri koneksi")
+                break
+
+            print("Pesan terenkripsi diterima: " + encrypted_data)  # print received encrypted message
+            decrypted_data = decrypt_message(encrypted_data, KEY)  # decrypt the message
+            print("Pesan asli setelah dekripsi: " + decrypted_data)  # print original message
+
+            response = input(" -> ")  # take input for response
+            encrypted_response = encrypt_message(response, KEY)  # encrypt the response
+            print("Pesan terenkripsi yang dikirim: " + encrypted_response)  # print encrypted response
+            conn.send(encrypted_response.encode())  # send encrypted response to client
+
+        except (ConnectionResetError, ConnectionAbortedError):
+            print("Koneksi terputus dengan klien.")
             break
 
-        print("Pesan terenkripsi diterima: " + encrypted_data)  # print received encrypted message
-        decrypted_data = decrypt_message(encrypted_data, KEY)  # decrypt the message
-        print("Pesan asli setelah dekripsi: " + decrypted_data)  # print original message
-
-        response = input(" -> ")  # take input for response
-        encrypted_response = encrypt_message(response, KEY)  # encrypt the response
-        print("Pesan terenkripsi yang dikirim: " + encrypted_response)  # print encrypted response
-        conn.send(encrypted_response.encode())  # send encrypted response to client
-
     conn.close()  # close the connection
+    server_socket.close()  # close the server socket
 
 if __name__ == '__main__':
     server_program()
