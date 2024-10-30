@@ -229,7 +229,86 @@ if __name__ == '__main__':
 
 ## socket_client.py
 
-File ini mengimplementasikan klien yang terhubung ke server, mengirim pesan terenkripsi, dan menerima balasan dari server.
+File socket_client.py memungkinkan klien untuk berkomunikasi dengan server menggunakan socket. Setiap pesan dienkripsi menggunakan algoritma DES sebelum dikirim, dan balasan dari server didekripsi untuk ditampilkan kepada pengguna. Program ini akan berjalan hingga klien mengirimkan pesan "bye", yang menyebabkan loop berhenti dan koneksi ditutup.
+
+### 1. Impor Libraries
+```
+import socket
+from des import encrypt_message, decrypt_message
+```
+   - import socket: Mengimpor modul socket untuk memungkinkan komunikasi jaringan antara klien dan server.
+   - from des import encrypt_message, decrypt_message: Mengimpor fungsi encrypt_message dan decrypt_message dari des.py untuk melakukan enkripsi dan dekripsi pesan yang dikirim ke server atau diterima dari server.
+     
+###2. Mendefinisikan Kunci Enkripsi
+```
+KEY = "AABBCCDDEEFF1122"
+```
+   - KEY: Mendefinisikan kunci enkripsi yang digunakan untuk enkripsi dan dekripsi pesan menggunakan algoritma DES. Nilai kunci harus sesuai antara klien dan server agar komunikasi bisa dilakukan.
+     
+### 3. Fungsi client_program()
+```
+def client_program():
+```
+   - Mendefinisikan fungsi utama yang akan dijalankan oleh klien.
+### 4. Mengatur Koneksi Socket
+```
+    host = socket.gethostname()  # as both code is running on same pc
+    port = 5000  # socket server port number
+
+    client_socket = socket.socket()  # instantiate
+    client_socket.connect((host, port))  # connect to the server
+```
+   - host = socket.gethostname(): Mengambil nama host dari komputer lokal tempat kode ini dijalankan. Karena server dan klien dijalankan di mesin yang sama, kita menggunakan hostname lokal.
+   - port = 5000: Mengatur port yang sama dengan yang digunakan oleh server.
+   - client_socket = socket.socket(): Membuat instance dari socket untuk klien.
+   - client_socket.connect((host, port)): Menghubungkan klien ke server pada alamat host dan port yang telah ditentukan.
+     
+### 5. Mengambil Input Awal untuk Pesan
+```
+    message = input(" -> ")  # take input
+```
+   - Menerima input pesan pertama dari pengguna. Pesan ini akan dienkripsi sebelum dikirim ke server.
+### 6. Loop untuk Mengirim dan Menerima Pesan
+```
+    while message.lower().strip() != 'bye':
+```
+   - Loop ini akan terus berjalan hingga pengguna mengirim pesan "bye".
+#### a. Enkripsi dan Pengiriman Pesan
+```
+        encrypted_message = encrypt_message(message, KEY)  # encrypt the message
+        client_socket.send(encrypted_message.encode())  # send message
+        print('Pesan terenkripsi yang dikirim: ' + encrypted_message)  # show sent message
+```
+   - encrypt_message(message, KEY): Mengenkripsi pesan yang dimasukkan oleh pengguna menggunakan kunci yang telah ditentukan.
+   - client_socket.send(encrypted_message.encode()): Mengirim pesan terenkripsi ke server setelah diubah menjadi byte menggunakan encode().
+   - print(): Menampilkan pesan terenkripsi yang dikirim untuk referensi.
+   
+#### b. Menerima dan Mendekripsi Balasan dari Server
+```
+        data = client_socket.recv(1024).decode()  # receive response
+        decrypted_data = decrypt_message(data, KEY)  # decrypt the response
+        print('Received from server: ' + decrypted_data)  # show in terminal
+```
+   - data = client_socket.recv(1024).decode(): Menerima pesan balasan dari server hingga 1024 byte dan mengubahnya kembali menjadi string menggunakan decode().
+   - decrypt_message(data, KEY): Mendekripsi balasan yang diterima menggunakan fungsi decrypt_message dan kunci enkripsi yang sama.
+   - print(): Menampilkan pesan asli yang diterima setelah didekripsi, sehingga pengguna dapat membaca balasan dari server.
+   
+#### c. Mengambil Input Baru
+```
+        message = input(" -> ")  # again take input
+```
+   - Mengambil input baru dari pengguna untuk iterasi berikutnya, yang akan dikirim ke server jika pesan bukan "bye".
+### 7. Menutup Koneksi
+```
+    client_socket.close()  # close the connection
+```
+   - Setelah keluar dari loop (saat pengguna mengetik "bye"), socket klien ditutup untuk mengakhiri koneksi dengan server.
+### 8. Menjalankan Fungsi Klien
+```
+if __name__ == '__main__':
+    client_program()
+```
+   - Memeriksa apakah script dijalankan sebagai program utama, jika ya, maka panggil client_program() untuk memulai klien.
 
 ### Cara Kerja:
 1. Klien menghubungkan diri ke server di alamat dan port yang ditentukan.
