@@ -15,7 +15,7 @@ Proyek ini adalah implementasi dari algoritma DES (Data Encryption Standard) unt
 
 File ini berisi fungsi-fungsi untuk mengkonversi data antara format heksadesimal dan biner, serta fungsi untuk mengenkripsi dan mendekripsi pesan. Berikut adalah penjelasan setiap fungsi:
 
-###1. Konversi Hexadecimal ke Biner
+### 1. Konversi Hexadecimal ke Biner
 
    ```
    def hex_to_bin(s):
@@ -29,7 +29,7 @@ File ini berisi fungsi-fungsi untuk mengkonversi data antara format heksadesimal
    - Menggunakan kamus (mp) untuk memetakan setiap digit heksadesimal ke representasi biner 4-bitnya.
    - Output adalah string biner yang dihasilkan dengan menggabungkan semua representasi biner untuk setiap karakter dalam string input.
 
-###2. Konversi Biner ke Hexadecimal
+### 2. Konversi Biner ke Hexadecimal
    
 ```
 def bin_to_hex(s):
@@ -43,7 +43,7 @@ def bin_to_hex(s):
    - Menggunakan kamus (mp) untuk memetakan setiap 4-bit biner ke digit heksadesimal.
    - Output adalah string heksadesimal yang dihasilkan dengan menggabungkan representasi heksadesimal dari setiap blok 4-bit dalam string input.
      
-###3. Konversi String ke Hexadecimal
+### 3. Konversi String ke Hexadecimal
 
 ```
 def string_to_hex(s):
@@ -53,7 +53,7 @@ def string_to_hex(s):
    - Menggunakan ord(i) untuk mendapatkan nilai ASCII dari setiap karakter dan format(..., 'x') untuk mengkonversi nilai tersebut menjadi heksadesimal.
    - Output adalah string heksadesimal yang merupakan representasi dari karakter-karakter dalam string input.
      
-###4. Konversi Hexadecimal ke String
+### 4. Konversi Hexadecimal ke String
 
 ```
 def hex_to_string(s):
@@ -63,7 +63,7 @@ def hex_to_string(s):
    - Mengambil dua karakter heksadesimal, mengkonversinya menjadi bilangan bulat dengan basis 16, dan kemudian menggunakan chr(...) untuk mendapatkan karakter dari nilai tersebut.
    - Output adalah string asli yang dihasilkan dari konversi.
      
-###5. Enkripsi Blok
+### 5. Enkripsi Blok
 ```
 def encrypt_block(pt, key):
     # Convert plaintext to hex
@@ -75,7 +75,7 @@ def encrypt_block(pt, key):
    - Pertama, plaintext dikonversi menjadi heksadesimal menggunakan fungsi string_to_hex.
    - Catatan: Saat ini, fungsi ini hanya mengembalikan plaintext yang telah dikonversi ke heksadesimal sebagai placeholder untuk logika enkripsi DES yang sebenarnya.
      
-###6. Dekripsi Blok
+### 6. Dekripsi Blok
 
 ```
 def decrypt_block(ct, key):
@@ -86,7 +86,7 @@ def decrypt_block(ct, key):
    - Fungsi ini berfungsi untuk mendekripsi satu blok dari ciphertext.
    - Saat ini, fungsi ini hanya mengembalikan ciphertext yang telah dikonversi kembali menjadi string biasa sebagai placeholder untuk logika dekripsi DES yang sebenarnya.
      
-###7. Enkripsi Pesan
+### 7. Enkripsi Pesan
 ```
 def encrypt_message(message, key):
     # Encrypt entire message by breaking it into blocks
@@ -96,7 +96,7 @@ def encrypt_message(message, key):
    - Menggunakan encrypt_block untuk mengenkripsi setiap blok dan menggabungkan hasilnya.
    - Output adalah string yang berisi pesan terenkripsi.
      
-###8. Dekripsi Pesan
+### 8. Dekripsi Pesan
 ```
 def decrypt_message(message, key):
     # Decrypt entire message by breaking it into blocks
