@@ -13,18 +13,27 @@ def bin_to_hex(s):
           "1100": 'C', "1101": 'D', "1110": 'E', "1111": 'F'}
     return "".join(mp[s[i:i+4]] for i in range(0, len(s), 4))
 
+def string_to_hex(s):
+    return ''.join(format(ord(i), 'x') for i in s)
+
+def hex_to_string(s):
+    return ''.join(chr(int(s[i:i+2], 16)) for i in range(0, len(s), 2))
+
 def encrypt_block(pt, key):
-    # Placeholder untuk enkripsi satu blok 64-bit
-    return pt  # Implementasi DES seharusnya ada di sini
+    # Convert plaintext to hex
+    pt_hex = string_to_hex(pt)
+    # Placeholder for actual DES encryption logic
+    return pt_hex  # Replace this with the actual encryption logic
 
 def decrypt_block(ct, key):
-    # Placeholder untuk dekripsi satu blok 64-bit
-    return ct  # Implementasi DES seharusnya ada di sini
+    # Placeholder for actual DES decryption logic
+    # Convert ciphertext from hex back to string
+    return hex_to_string(ct)  # Replace this with the actual decryption logic
 
 def encrypt_message(message, key):
-    # Enkripsi seluruh pesan dengan memecahnya menjadi blok-blok
-    return "".join(encrypt_block(message[i:i+16], key) for i in range(0, len(message), 16))
+    # Encrypt entire message by breaking it into blocks
+    return "".join(encrypt_block(message[i:i+8], key) for i in range(0, len(message), 8))
 
 def decrypt_message(message, key):
-    # Dekripsi seluruh pesan dengan memecahnya menjadi blok-blok
+    # Decrypt entire message by breaking it into blocks
     return "".join(decrypt_block(message[i:i+16], key) for i in range(0, len(message), 16))
