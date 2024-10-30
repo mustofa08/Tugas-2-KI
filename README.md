@@ -25,9 +25,9 @@ File ini berisi fungsi-fungsi untuk mengkonversi data antara format heksadesimal
     return "".join(mp[i] for i in s)
    ```
 
-   -Fungsi ini mengubah string heksadesimal menjadi string biner.
-   -Menggunakan kamus (mp) untuk memetakan setiap digit heksadesimal ke representasi biner 4-bitnya.
-   -Output adalah string biner yang dihasilkan dengan menggabungkan semua representasi biner untuk setiap karakter dalam string input.
+   - Fungsi ini mengubah string heksadesimal menjadi string biner.
+   - Menggunakan kamus (mp) untuk memetakan setiap digit heksadesimal ke representasi biner 4-bitnya.
+   - Output adalah string biner yang dihasilkan dengan menggabungkan semua representasi biner untuk setiap karakter dalam string input.
 
 ---
 
