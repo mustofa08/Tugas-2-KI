@@ -15,47 +15,19 @@ Proyek ini adalah implementasi dari algoritma DES (Data Encryption Standard) unt
 
 File ini berisi fungsi-fungsi untuk mengkonversi data antara format heksadesimal dan biner, serta fungsi untuk mengenkripsi dan mendekripsi pesan. Berikut adalah penjelasan setiap fungsi:
 
-### Fungsi-fungsi:
+1. Konversi Hexadecimal ke Biner
 
-1. **`hex_to_bin(s)`**:
-   - Mengkonversi string heksadesimal menjadi string biner.
-   - Input: string heksadesimal.
-   - Output: string biner yang sesuai.
+   ```
+   def hex_to_bin(s):
+    mp = {'0': "0000", '1': "0001", '2': "0010", '3': "0011", '4': "0100",
+          '5': "0101", '6': "0110", '7': "0111", '8': "1000", '9': "1001",
+          'A': "1010", 'B': "1011", 'C': "1100", 'D': "1101", 'E': "1110", 'F': "1111"}
+    return "".join(mp[i] for i in s)
+   ```
 
-2. **`bin_to_hex(s)`**:
-   - Mengkonversi string biner menjadi string heksadesimal.
-   - Input: string biner.
-   - Output: string heksadesimal yang sesuai.
-
-3. **`string_to_hex(s)`**:
-   - Mengkonversi string biasa menjadi representasi heksadesimal.
-   - Input: string biasa.
-   - Output: string heksadesimal yang sesuai.
-
-4. **`hex_to_string(s)`**:
-   - Mengkonversi string heksadesimal kembali menjadi string biasa.
-   - Input: string heksadesimal.
-   - Output: string biasa yang sesuai.
-
-5. **`encrypt_block(pt, key)`**:
-   - Placeholder untuk logika enkripsi blok menggunakan DES.
-   - Input: plaintext (string) dan kunci (string).
-   - Output: ciphertext dalam bentuk heksadesimal.
-
-6. **`decrypt_block(ct, key)`**:
-   - Placeholder untuk logika dekripsi blok menggunakan DES.
-   - Input: ciphertext (string) dan kunci (string).
-   - Output: plaintext (string).
-
-7. **`encrypt_message(message, key)`**:
-   - Mengenkripsi seluruh pesan dengan membagi menjadi blok.
-   - Input: pesan (string) dan kunci (string).
-   - Output: pesan terenkripsi dalam bentuk heksadesimal.
-
-8. **`decrypt_message(message, key)`**:
-   - Mendekripsi seluruh pesan dengan membagi menjadi blok.
-   - Input: pesan terenkripsi (string) dan kunci (string).
-   - Output: pesan asli (string).
+   -Fungsi ini mengubah string heksadesimal menjadi string biner.
+   -Menggunakan kamus (mp) untuk memetakan setiap digit heksadesimal ke representasi biner 4-bitnya.
+   -Output adalah string biner yang dihasilkan dengan menggabungkan semua representasi biner untuk setiap karakter dalam string input.
 
 ---
 
