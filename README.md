@@ -10,13 +10,6 @@ Kelas : Keamanan Informasi B
 
 Proyek ini adalah implementasi dari algoritma DES (Data Encryption Standard) untuk mengenkripsi dan mendekripsi pesan yang dikirim antara klien dan server menggunakan socket programming di Python. Proyek ini terdiri dari tiga file utama: `des.py`, `socket_server.py`, dan `socket_client.py`.
 
-## Daftar Isi
-- [des.py](#despy)
-- [socket_server.py](#socket_serverpy)
-- [socket_client.py](#socket_clientpy)
-- [Cara Menjalankan](#cara-menjalankan)
-
----
 
 ## des.py
 
